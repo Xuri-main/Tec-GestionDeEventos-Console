@@ -1,0 +1,17 @@
+# Archivos de compilación de C
+*.o
+*.out
+*.exe
+*.app
+
+# Archivos de persistencia de datos locales
+*.txt
+*.pdf
+!info.txt
+
+# Configuración de Visual Studio Code
+.vscode/
+
+# Ignorar el zip final para no subirlo al repositorio
+*.zip
+PP1_Est.zip
