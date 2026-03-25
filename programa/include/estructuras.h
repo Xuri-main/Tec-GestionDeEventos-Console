@@ -1,6 +1,7 @@
 /**
  * Archivo: estructuras.h
- * Descripcion: Este archivo contiene las definiciones de las estructuras de datos utilizadas en el programa de gestión de eventos.
+ * Descripcion: Este archivo contiene las definiciones de las estructuras de datos utilizadas en 
+ *              el programa de gestión de eventos.
  * Autores: Emilio Funes R. & Ginger Rodríguez G.
  * Fecha de creación: 20/03/2026
  */
@@ -10,7 +11,7 @@
 
 // Asiento
 typedef struct {
-    char identificador[10]; // "V1", "V2" (Inicial del sector)
+    char identificador[10]; // "V1", "V2"
     int vendido;            // 0 = Disponible, 1 = Vendido
 } Asiento;
 
@@ -21,7 +22,7 @@ typedef struct {
     int cantidad_espacios;  
     float precio; 
     float recaudado;        // Total de dinero recaudado por sector
-    Asiento *asientos;      // Puntero, Arreglo dinámico
+    Asiento *asientos;
 } Sector;
 
 // Sitio de Eventos
@@ -30,17 +31,17 @@ typedef struct {
     char ubicacion[100];
     char sitio_web[100];
     int cantidad_sectores;
-    Sector *sectores;       // Puntero, Arreglo dinámico
+    Sector *sectores;
 } Sitio;
 
-// 4. Estructura para el Evento
+// Evento
 typedef struct {
     char nombre[100];
     char productora[100];
-    char fecha[20];         // Formato DD/MM/AAAA
-    Sitio *sitio_base;      // Puntero al sitio donde se realizará
+    char fecha[20];
+    Sitio *sitio_base;
     int cantidad_sectores_evento;
-    Sector *sectores_evento; // Arreglo dinámico de sectores exclusivo para este evento
+    Sector *sectores_evento;
 } Evento;
 
 // Factura
