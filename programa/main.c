@@ -1,46 +1,44 @@
-#include <stdio.h>
-#include <stdlib.h>
+/**
+ * Archivo: main.c
+ * Descripcion: Contiene la funcion principal y los menus del sistema.
+ * Autores: Emilio Funes R. & Ginger Rodríguez G.
+ */
 
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+#include "include/archivos.h"
+#include "include/login.h"
 
 void menuPrincipal();
 void menuAdministrativo();
 void menuGeneral();
-int verificarLogin();
 
-void gestionSitioEventos();
-void gestionEspaciosEventos();
-void gestionEventos();
-void estadoEventos();
-void listaFacturas();
-void estadisticas();
+void gestionSitioEventos() {}
+void gestionEspaciosEventos() {}
+void gestionEventos() {}
+void estadoEventos() {}
+void listaFacturas() {}
+void estadisticas() {}
+void consultaPorEvento() {}
+void compraDeBoletos() {}
 
-void consultaPorEvento();
-void compraDeBoletos();
-
-
-
-int main()
-{
+int main() {
     int opcionPrincipal;
 
-    do
-    {
+    cargarTodosLosDatos();
+
+    do {
         menuPrincipal();
         printf("Seleccione una opcion: ");
         scanf("%d", &opcionPrincipal);
 
-        switch(opcionPrincipal)
-        {
+        switch(opcionPrincipal) {
             case 1:
-                if(verificarLogin())
-                {
+                if(iniciarSesion()) {
+                    printf("\n¡Acceso concedido!\n");
                     menuAdministrativo();
-                }
-                else
-                {
-                    printf("\nOops! Acceso denegado.\n");
+                } else {
+                    printf("\nOops! Acceso denegado o archivo usuarios.txt no encontrado.\n");
                 }
                 break;
 
@@ -49,6 +47,7 @@ int main()
                 break;
 
             case 3:
+                guardarTodosLosDatos();
                 printf("\nSaliendo del sistema...\n");
                 break;
 
@@ -61,8 +60,7 @@ int main()
     return 0;
 }
 
-void menuPrincipal()
-{
+void menuPrincipal() {
     printf("\n========================================\n");
     printf("             MENU PRINCIPAL             \n");
     printf("========================================\n");
@@ -72,19 +70,10 @@ void menuPrincipal()
     printf("========================================\n");
 }
 
-int verificarLogin()
-{
-
-    printf("\n===== LOGIN EN PROCESO =====\n");
-    
-}
-
-void menuAdministrativo()
-{
+void menuAdministrativo() {
     int opcionAdmin;
 
-    do
-    {
+    do {
         printf("\n========================================\n");
         printf("      OPCIONES ADMINISTRATIVAS          \n");
         printf("========================================\n");
@@ -99,49 +88,24 @@ void menuAdministrativo()
         printf("Seleccione una opcion: ");
         scanf("%d", &opcionAdmin);
 
-        switch(opcionAdmin)
-        {
-            case 1:
-                gestionSitioEventos();
-                break;
-
-            case 2:
-                gestionEspaciosEventos();
-                break;
-
-            case 3:
-                gestionSitioEventos();
-                break;
-
-            case 4:
-                estadoEventos();
-                break;
-
-            case 5:
-                listaFacturas();
-                break;
-
-            case 6:
-                estadisticas();
-                break;
-
-            case 7:
-                printf("\nRegresando al menu principal...\n");
-                break;
-
-            default:
-                printf("\nOpcion invalida. Intente de nuevo.\n");
+        switch(opcionAdmin) {
+            case 1: gestionSitioEventos(); break;
+            case 2: gestionEspaciosEventos(); break;
+            case 3: gestionEventos(); break;
+            case 4: estadoEventos(); break;
+            case 5: listaFacturas(); break;
+            case 6: estadisticas(); break;
+            case 7: printf("\nRegresando al menu principal...\n"); break;
+            default: printf("\nOpcion invalida. Intente de nuevo.\n");
         }
 
     } while(opcionAdmin != 7);
 }
 
-void menuGeneral()
-{
+void menuGeneral() {
     int opcionGeneral;
 
-    do
-    {
+    do {
         printf("\n========================================\n");
         printf("         OPCIONES GENERALES             \n");
         printf("========================================\n");
@@ -152,49 +116,12 @@ void menuGeneral()
         printf("Seleccione una opcion: ");
         scanf("%d", &opcionGeneral);
 
-        switch(opcionGeneral)
-        {
-            case 1:
-                consultaPorEvento();
-                break;
-
-            case 2:
-                compraDeBoletos();
-                break;
-
-            case 3:
-                printf("\nRegresando al menu principal...\n");
-                break;
-
-            default:
-                printf("\nOpcion invalida. Intente de nuevo.\n");
+        switch(opcionGeneral) {
+            case 1: consultaPorEvento(); break;
+            case 2: compraDeBoletos(); break;
+            case 3: printf("\nRegresando al menu principal...\n"); break;
+            default: printf("\nOpcion invalida. Intente de nuevo.\n");
         }
 
     } while(opcionGeneral != 3);
 }
-
-/* lOGICA PARA DESPUES */
-
-void gestionarSitiosEventos()
-{}
-
-void gestionEspaciosEventos()
-{}
-
-void gestionSitioEventos()
-{}
-
-void estadoEventos()
-{}
-
-void listaFacturas()
-{}
-
-void estadisticas()
-{}
-
-void consultaPorEvento()
-{}
-
-void compraDeBoletos()
-{}
