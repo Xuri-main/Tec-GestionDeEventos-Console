@@ -6,14 +6,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "include/archivos.h"
 #include "include/login.h"
+#include "include/sitios.h"
 
 void menuPrincipal();
 void menuAdministrativo();
 void menuGeneral();
 
-void gestionSitioEventos() {}
 void gestionEspaciosEventos() {}
 void gestionEventos() {}
 void estadoEventos() {}
@@ -48,6 +49,7 @@ int main() {
 
             case 3:
                 guardarTodosLosDatos();
+                liberarMemoriaSitios();
                 printf("\nSaliendo del sistema...\n");
                 break;
 

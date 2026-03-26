@@ -17,4 +17,8 @@ void cargarTodosLosDatos();
 void guardarTodosLosDatos();
 int obtenerCredencialesAdmin(char *usuario, char *clave);
 
+void cargarSitios();
+void guardarSitios();
+int cargarLoteSitiosDesdeRuta(const char *ruta);
+
 #endif // ARCHIVOS_H
