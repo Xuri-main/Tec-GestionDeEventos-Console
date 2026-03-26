@@ -5,7 +5,6 @@
 *.app
 
 # Archivos de persistencia de datos locales
-*.txt
 *.pdf
 !info.txt
 
