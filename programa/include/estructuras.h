@@ -11,34 +11,34 @@
 
 // Asiento
 typedef struct {
-    char identificador[10]; // "V1", "V2"
+    char *identificador;    // "V1", "V2"
     int vendido;            // 0 = Disponible, 1 = Vendido
 } Asiento;
 
 // Sector
 typedef struct {
-    char nombre[50];        // "VIP", "General"
+    char *nombre;           // "VIP", "General"
     char inicial;           // 'V', 'G'
     int cantidad_espacios;  
     float precio; 
-    float recaudado;        // Total de dinero recaudado por sector
+    float recaudado;        
     Asiento *asientos;
 } Sector;
 
 // Sitio de Eventos
 typedef struct {
-    char nombre[50];
-    char ubicacion[100];
-    char sitio_web[100];
+    char *nombre;
+    char *ubicacion;    
+    char *sitio_web;
     int cantidad_sectores;
     Sector *sectores;
 } Sitio;
 
 // Evento
 typedef struct {
-    char nombre[100];
-    char productora[100];
-    char fecha[20];
+    char *nombre;
+    char *productora;
+    char *fecha;
     Sitio *sitio_base;
     int cantidad_sectores_evento;
     Sector *sectores_evento;
@@ -47,12 +47,12 @@ typedef struct {
 // Factura
 typedef struct {
     int id_factura;
-    char fecha_compra[20];
-    char cedula_cliente[20];
-    char nombre_cliente[100];
-    char nombre_evento[100];
+    char *fecha_compra;
+    char *cedula_cliente;
+    char *nombre_cliente;
+    char *nombre_evento;
     float subtotal;
-    float costo_servicio;   // 5% del subtotal
+    float costo_servicio;
     float total;
 } Factura;
 
