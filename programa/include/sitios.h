@@ -5,18 +5,37 @@
  * Fecha de creación: 26/03/2026
  */
 
+/**
+ * Archivo: sitios.h
+ * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
+ * Fecha: 26/03/2026
+ */
+
 #ifndef SITIOS_H
 #define SITIOS_H
 
 #include "estructuras.h"
 
-void gestionSitioEventos();
-
+// Memoria
 void inicializarMemoriaSitios(int capacidad_inicial);
-int registrarSitioEnMemoria(const char *nombre, const char *ubicacion, const char *web, int cant_sectores);
-int obtenerCantidadSitios();
-Sitio* obtenerArregloSitios();
-
 void liberarMemoriaSitios();
+
+// Getters y Busqueda
+int getCantidadSitios();
+Sitio* getArregloSitios();
+int existeSitio(const char *nombre);
+Sitio* obtenerSitioPorNombre(const char *nombre);
+
+// Agregar y Modificar
+int agregarSitio(const char *nombre, const char *ubicacion, const char *web, int cant_sectores);
+int agregarSectorASitio(int indiceSitio, const char *nombreSector, char inicial, int cantidad);
+char* crearIdentificadorAsiento(char inicial, int numero);
+void resetearSectores(int indiceSitio);
+
+// Menus y Visualizacion
+void gestionSitioEventos();
+void mostrarSitios();
+void gestionEspaciosEventos();
+void mostrarSectoresDeSitio(int indiceSitio);
 
 #endif // SITIOS_H
