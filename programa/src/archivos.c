@@ -9,15 +9,30 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/archivos.h"
-#include "../include/sitios.h"
+#include "../include/sitios.h" 
+#include "../include/eventos.h"
+#include "../include/cadenas.h"
 
-void cargarTodosLosDatos() {}
+// Generales
 
-void guardarTodosLosDatos() {}
+void cargarTodosLosDatos() {
+    printf("[INFO] Cargando datos desde archivos...\n");
+    cargarSitios();
+    cargarEventos();
+}
+
+void guardarTodosLosDatos() {
+    printf("[INFO] Guardando todos los datos...\n");
+    guardarSitios();
+    guardarEventos();
+}
 
 int obtenerCredencialesAdmin(char *usuario, char *clave) {
     FILE *archivo = fopen(RUTA_USUARIOS, "r");
-    if (archivo == NULL) return 0;
+    
+    if (archivo == NULL) {
+        return 0;
+    }
 
     if (fscanf(archivo, "%49[^,],%49s", usuario, clave) == 2) {
         fclose(archivo);
@@ -28,12 +43,13 @@ int obtenerCredencialesAdmin(char *usuario, char *clave) {
     return 0;
 }
 
-// Gestion de Sitios
+// Sitios
 
 void cargarSitios() {
     FILE *archivo = fopen(RUTA_SITIOS, "r");
+    
     if (archivo == NULL) {
-        inicializarMemoriaSitios(0);
+        inicializarMemoriaSitios(0); 
         return;
     }
 
@@ -44,64 +60,210 @@ void cargarSitios() {
         char linea[256];
         for (int i = 0; i < cantidad; i++) {
             if (fgets(linea, sizeof(linea), archivo)) {
-                linea[strcspn(linea, "\n")] = 0;
+                removerSaltoLinea(linea);
                 
                 char *nombre = strtok(linea, ",");
                 char *ubi = strtok(NULL, ",");
                 char *web = strtok(NULL, ",");
                 char *cant_sec_str = strtok(NULL, ",");
                 
-                if(nombre && ubi && web && cant_sec_str) {
-                    registrarSitioEnMemoria(nombre, ubi, web, atoi(cant_sec_str));
+                if (nombre != NULL) {
+                    if (ubi != NULL) {
+                        if (web != NULL) {
+                            if (cant_sec_str != NULL) {
+                                if (agregarSitio(nombre, ubi, web, 0)) {
+                                    int indiceNuevoSitio = getCantidadSitios() - 1;
+                                    int cant_sectores_guardados = atoi(cant_sec_str);
+
+                                    for (int j = 0; j < cant_sectores_guardados; j++) {
+                                        if (fgets(linea, sizeof(linea), archivo)) {
+                                            removerSaltoLinea(linea);
+                                            char *nom_sec = strtok(linea, ",");
+                                            char *ini_sec_str = strtok(NULL, ",");
+                                            char *cant_esp_str = strtok(NULL, ",");
+                                            
+                                            if (nom_sec != NULL) {
+                                                if (ini_sec_str != NULL) {
+                                                    if (cant_esp_str != NULL) {
+                                                        agregarSectorASitio(indiceNuevoSitio, nom_sec, ini_sec_str[0], atoi(cant_esp_str));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+    
     fclose(archivo);
 }
 
 void guardarSitios() {
     FILE *archivo = fopen(RUTA_SITIOS, "w");
-    if (archivo == NULL) return;
+    
+    if (archivo == NULL) {
+        return;
+    }
 
-    int cantidad = obtenerCantidadSitios();
-    Sitio *arreglo = obtenerArregloSitios();
+    int cantidad = getCantidadSitios();
+    Sitio *arreglo = getArregloSitios();
 
     fprintf(archivo, "%d\n", cantidad);
     
     for (int i = 0; i < cantidad; i++) {
-        fprintf(archivo, "%s,%s,%s,%d\n", 
-                arreglo[i].nombre, 
-                arreglo[i].ubicacion, 
-                arreglo[i].sitio_web, 
-                arreglo[i].cantidad_sectores);
+        fprintf(archivo, "%s,%s,%s,%d\n", arreglo[i].nombre, arreglo[i].ubicacion, arreglo[i].sitio_web, arreglo[i].cantidad_sectores);
+        
+        for (int j = 0; j < arreglo[i].cantidad_sectores; j++) {
+            Sector *sec = &arreglo[i].sectores[j];
+            fprintf(archivo, "%s,%c,%d\n", sec->nombre, sec->inicial, sec->cantidad_espacios);
+        }
     }
+    
     fclose(archivo);
 }
 
 int cargarLoteSitiosDesdeRuta(const char *ruta) {
     FILE *archivo = fopen(ruta, "r");
-    if (archivo == NULL) return 0;
+    
+    if (archivo == NULL) {
+        return 0; 
+    }
 
     char linea[256];
     int agregados = 0;
 
     while (fgets(linea, sizeof(linea), archivo)) {
-        linea[strcspn(linea, "\n")] = 0; 
-    
+        removerSaltoLinea(linea);
+        
         char *nombre = strtok(linea, ",");
         char *ubi = strtok(NULL, ",");
         char *web = strtok(NULL, ",");
 
-        if (nombre && ubi && web) {
-            if(ubi[0] == ' ') ubi++; 
-            if(web[0] == ' ') web++;
-
-            if (registrarSitioEnMemoria(nombre, ubi, web, 0)) {
-                agregados++;
+        if (nombre != NULL) {
+            if (ubi != NULL) {
+                if (web != NULL) {
+                    if (ubi[0] == ' ') {
+                        ubi++; 
+                    }
+                    if (web[0] == ' ') {
+                        web++;
+                    }
+                    
+                    if (agregarSitio(nombre, ubi, web, 0)) {
+                        agregados++;
+                    }
+                }
             }
         }
     }
+    
     fclose(archivo);
     return agregados;
+}
+
+// Eventos
+
+void cargarEventos() {
+    FILE *archivo = fopen(RUTA_EVENTOS, "r");
+    
+    if (archivo == NULL) {
+        inicializarMemoriaEventos(0);
+        return;
+    }
+
+    int cantidad_eventos;
+    if (fscanf(archivo, "%d\n", &cantidad_eventos) == 1) {
+        inicializarMemoriaEventos(0); 
+
+        char linea[512];
+        for (int i = 0; i < cantidad_eventos; i++) {
+            if (fgets(linea, sizeof(linea), archivo)) {
+                removerSaltoLinea(linea);
+                
+                char *nombre = strtok(linea, ",");
+                char *prod = strtok(NULL, ",");
+                char *fecha = strtok(NULL, ",");
+                char *nombre_sitio = strtok(NULL, ",");
+
+                if (nombre != NULL) {
+                    if (prod != NULL) {
+                        if (fecha != NULL) {
+                            if (nombre_sitio != NULL) {
+                                Sitio *sitio_base = obtenerSitioPorNombre(nombre_sitio);
+                                
+                                if (sitio_base != NULL) {
+                                    Evento *nuevoEv = agregarEvento(nombre, prod, fecha, sitio_base);
+                                    
+                                    if (nuevoEv != NULL) {
+                                        for (int j = 0; j < nuevoEv->cantidad_sectores_evento; j++) {
+                                            Sector *sec = &nuevoEv->sectores_evento[j];
+                                            
+                                            if (fgets(linea, sizeof(linea), archivo)) {
+                                                removerSaltoLinea(linea);
+                                                char *precio_str = strtok(linea, ",");
+                                                char *recau_str = strtok(NULL, ",");
+                                                
+                                                if (precio_str != NULL) {
+                                                    if (recau_str != NULL) {
+                                                        sec->precio = atof(precio_str);
+                                                        sec->recaudado = atof(recau_str);
+                                                    }
+                                                }
+                                            }
+
+                                            if (fgets(linea, sizeof(linea), archivo)) {
+                                                removerSaltoLinea(linea);
+                                                for (int k = 0; k < sec->cantidad_espacios; k++) {
+                                                    if (linea[k] != '\0') {
+                                                        sec->asientos[k].vendido = linea[k] - '0';
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    fclose(archivo);
+}
+
+void guardarEventos() {
+    FILE *archivo = fopen(RUTA_EVENTOS, "w");
+    
+    if (archivo == NULL) {
+        return;
+    }
+
+    int cantidad = getCantidadEventos();
+    Evento *arreglo = getArregloEventos();
+
+    fprintf(archivo, "%d\n", cantidad);
+    
+    for (int i = 0; i < cantidad; i++) {
+        fprintf(archivo, "%s,%s,%s,%s\n", arreglo[i].nombre, arreglo[i].productora, arreglo[i].fecha, arreglo[i].sitio_base->nombre); 
+        
+        for (int j = 0; j < arreglo[i].cantidad_sectores_evento; j++) {
+            Sector *sec = &arreglo[i].sectores_evento[j];
+            
+            fprintf(archivo, "%.2f,%.2f\n", sec->precio, sec->recaudado);
+            
+            for (int k = 0; k < sec->cantidad_espacios; k++) {
+                fprintf(archivo, "%d", sec->asientos[k].vendido);
+            }
+            fprintf(archivo, "\n");
+        }
+    }
+    
+    fclose(archivo);
 }

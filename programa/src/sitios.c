@@ -1,7 +1,8 @@
 /**
  * Archivo: sitios.c
- * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
- * Fecha: 26/03/2026
+ * Descripcion: Implementacion de la gestion de sitios de eventos, incluyendo la memoria dinamica y la interaccion con archivos.
+ * Autores: Jareck Levell C.
+ * Fecha de creación: 26/03/2026
  */
 
 #include <stdio.h>

@@ -9,32 +9,28 @@
 #ifndef ESTRUCTURAS_H
 #define ESTRUCTURAS_H
 
-// Asiento
 typedef struct {
-    char *identificador;    // "V1", "V2"
-    int vendido;            // 0 = Disponible, 1 = Vendido
+    char *identificador;    
+    int vendido;            
 } Asiento;
 
-// Sector
 typedef struct {
-    char *nombre;           // "VIP", "General"
-    char inicial;           // 'V', 'G'
+    char *nombre;           
+    char inicial;           
     int cantidad_espacios;  
     float precio; 
     float recaudado;        
     Asiento *asientos;
 } Sector;
 
-// Sitio de Eventos
 typedef struct {
     char *nombre;
-    char *ubicacion;    
+    char *ubicacion;
     char *sitio_web;
     int cantidad_sectores;
     Sector *sectores;
 } Sitio;
 
-// Evento
 typedef struct {
     char *nombre;
     char *productora;
@@ -44,7 +40,6 @@ typedef struct {
     Sector *sectores_evento;
 } Evento;
 
-// Factura
 typedef struct {
     int id_factura;
     char *fecha_compra;
