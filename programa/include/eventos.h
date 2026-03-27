@@ -24,5 +24,6 @@ Evento* agregarEvento(const char *nombre, const char *productora, const char *fe
 
 // Menus y Visualizacion
 void gestionEventos();
+void estadoEventos();
 
 #endif // EVENTOS_H

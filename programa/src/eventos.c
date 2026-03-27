@@ -171,6 +171,8 @@ void gestionEventos() {
     Sitio *sitio_base = &sitiosDisponibles[indice_sitio - 1];
     
     if (sitio_base->cantidad_sectores == 0) {
+        printf("\nOops! El sitio '%s' no tiene sectores definidos.\n", sitio_base->nombre);
+        printf("Vaya a 'Gestion de espacios sitio de eventos' y cree sectores primero.\n");
         return;
     }
 
@@ -191,4 +193,69 @@ void gestionEventos() {
     }
 
     printf("\n¡Evento '%s' configurado exitosamente!\n", nuevoEvento->nombre);
+}
+
+void estadoEventos() {
+    if (getCantidadEventos() == 0) {
+        printf("\nNo hay eventos registrados en el sistema.\n");
+        return;
+    }
+
+    int opcion;
+    printf("\n========================================\n");
+    printf("           ESTADO DE EVENTO             \n");
+    printf("========================================\n");
+    
+    for (int i = 0; i < getCantidadEventos(); i++) {
+        printf("%d. %s (Fecha: %s)\n", i + 1, listaEventos[i].nombre, listaEventos[i].fecha);
+    }
+    
+    printf("0. Volver al menu administrativo\n");
+    printf("========================================\n");
+    printf("Seleccione el evento que desea consultar: ");
+    scanf("%d", &opcion);
+    limpiarBufferEntrada();
+
+    if (opcion == 0) {
+        return;
+    }
+
+    if (opcion > 0) {
+        if (opcion <= getCantidadEventos()) {
+            Evento *ev = &listaEventos[opcion - 1];
+            
+            printf("\n--- DETALLES DEL EVENTO ---\n");
+            printf("Nombre: %s\n", ev->nombre);
+            printf("Productora: %s\n", ev->productora);
+            printf("Sitio: %s\n", ev->sitio_base->nombre);
+            printf("Fecha: %s\n", ev->fecha);
+            printf("---------------------------\n");
+            
+            if (ev->cantidad_sectores_evento == 0) {
+                printf("Este evento no tiene sectores asignados.\n");
+            } else {
+                for (int i = 0; i < ev->cantidad_sectores_evento; i++) {
+                    Sector *sec = &ev->sectores_evento[i];
+                    
+                    printf("\n> Sector: %s | Precio: %.2f | Recaudado: %.2f\n", sec->nombre, sec->precio, sec->recaudado);
+                    printf("  Asientos:\n  ");
+                    
+                    for (int j = 0; j < sec->cantidad_espacios; j++) {
+                        // Imprime el ID del asiento y verifica si esta vendido (1) o disponible (0)
+                        if (sec->asientos[j].vendido == 1) {
+                            printf("[%s: Vendido] ", sec->asientos[j].identificador);
+                        } else {
+                            printf("[%s: Disponible] ", sec->asientos[j].identificador);
+                        }
+                    }
+                    printf("\n");
+                }
+            }
+            printf("---------------------------\n");
+        } else {
+            printf("\nSeleccion invalida.\n");
+        }
+    } else {
+        printf("\nSeleccion invalida.\n");
+    }
 }

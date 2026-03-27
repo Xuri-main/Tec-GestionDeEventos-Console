@@ -1,7 +1,7 @@
 /**
  * Archivo: cadenas.c
- * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
  * Descripcion: Este archivo contiene las implementaciones de funciones relacionadas con el manejo de cadenas
+ * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
  * Fecha: 26/03/2026
  */
 

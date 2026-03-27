@@ -19,7 +19,6 @@ void menuAdministrativo();
 void menuGeneral();
 
 // PENDIENTE
-void estadoEventos() {}
 void listaFacturas() {}
 void estadisticas() {}
 void consultaPorEvento() {}

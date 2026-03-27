@@ -5,12 +5,6 @@
  * Fecha de creación: 26/03/2026
  */
 
-/**
- * Archivo: sitios.h
- * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
- * Fecha: 26/03/2026
- */
-
 #ifndef SITIOS_H
 #define SITIOS_H
 
