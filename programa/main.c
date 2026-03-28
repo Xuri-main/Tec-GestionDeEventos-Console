@@ -12,6 +12,7 @@
 #include "include/sitios.h"
 #include "include/eventos.h"
 #include "include/cadenas.h"
+#include "include/ventas.h"
 
 // Menus
 void menuPrincipal();
@@ -21,8 +22,6 @@ void menuGeneral();
 // PENDIENTE
 void listaFacturas() {}
 void estadisticas() {}
-void consultaPorEvento() {}
-void compraDeBoletos() {}
 
 int main() {
     int opcionPrincipal;
