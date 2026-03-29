@@ -40,7 +40,7 @@ void generarFacturaPDF(Factura *fac) {
 
     int pos_y = 800;
 
-    pdf_add_text(pdf, NULL, "SISTEMA DE GESTION DE EVENTOS TEC", 18, 50, pos_y, PDF_BLACK);
+    pdf_add_text(pdf, NULL, "SISTEMA DE GESTION DE EVENTOS", 18, 50, pos_y, PDF_BLACK);
     pos_y = pos_y - 30;
 
     char buffer[200];
