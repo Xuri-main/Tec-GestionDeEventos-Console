@@ -1,7 +1,7 @@
 5
 Peppers Club,Zapote,www.peppers.com,2
 VIP,V,10
-General,G,50
+General,G,30
 Mercadito La California,San Jose,www.mercalacali.com,0
 Centro de Convenciones,Heredia,www.centrodeconvencion.co.cr,0
 Museo de Los Niños,San Jose,www.museokids.co.cr,0

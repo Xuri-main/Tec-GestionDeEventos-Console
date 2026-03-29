@@ -34,7 +34,7 @@ int main() {
         switch(opcionPrincipal) {
             case 1:
                 if (iniciarSesion()) {
-                    printf("\n¡Acceso concedido!\n");
+                    printf("\nAcceso concedido!\n");
                     menuAdministrativo();
                 } else {
                     printf("\nOops! Acceso denegado o archivo usuarios.txt no encontrado.\n");

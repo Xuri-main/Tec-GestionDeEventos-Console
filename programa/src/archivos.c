@@ -1,8 +1,8 @@
 /**
  * Archivo: archivos.c
  * Descripcion: Implementacion de la lectura y escritura de archivos planos.
- * Autores: Emilio Funes R.
- * Fecha de creación: 25/03/2026
+ * Autores: Emilio Funes R , Ginger Rodríguez G. & Jareck Levell C.
+ * Fecha: 28/03/2026
  */
 
 #include <stdio.h>
@@ -12,6 +12,7 @@
 #include "../include/sitios.h" 
 #include "../include/eventos.h"
 #include "../include/cadenas.h"
+#include "../include/facturas.h"
 
 // Generales
 
@@ -19,12 +20,14 @@ void cargarTodosLosDatos() {
     printf("[INFO] Cargando datos desde archivos...\n");
     cargarSitios();
     cargarEventos();
+    cargarFacturas();
 }
 
 void guardarTodosLosDatos() {
     printf("[INFO] Guardando todos los datos...\n");
     guardarSitios();
     guardarEventos();
+    guardarFacturas();
 }
 
 int obtenerCredencialesAdmin(char *usuario, char *clave) {

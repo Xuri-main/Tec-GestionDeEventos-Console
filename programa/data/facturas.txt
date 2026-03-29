@@ -1,4 +1,5 @@
 1
-28/03/2026,702920805,Ginger Rodriguez G.,Concierto de Rock,xuriwiru,Peppers Club,11/1/2027,800.00,40.00,840.00,2
-V1,400.00
-V2,400.00
+28/03/2026,702730309,Emilio Funes R.,Concierto de Kenyari,Septima Estacion,Peppers Club,22/05/2026,3000.00,150.00,3150.00,3
+V1,1000.00
+V2,1000.00
+V3,1000.00

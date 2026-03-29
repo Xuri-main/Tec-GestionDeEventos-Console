@@ -286,14 +286,14 @@ void gestionEspaciosEventos() {
                             limpiarBufferEntrada(); 
 
                             if (agregarSectorASitio(indiceReal, nombre_sec, inicial_sec, cantidad_espacios)) {
-                                printf("\n¡Sector creado y asientos generados exitosamente!\n");
+                                printf("\nSector creado y asientos generados exitosamente!\n");
                             } else {
                                 printf("\nOops! Falla de memoria al crear el sector.\n");
                             }
                             break;
                         case 2:
                             resetearSectores(indiceReal);
-                            printf("\n¡Todos los sectores y espacios del sitio han sido eliminados!\n");
+                            printf("\nTodos los sectores y espacios del sitio han sido eliminados!\n");
                             break;
                         case 3:
                             break;

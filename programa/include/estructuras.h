@@ -3,7 +3,7 @@
  * Descripcion: Este archivo contiene las definiciones de las estructuras de datos utilizadas en 
  *              el programa de gestión de eventos.
  * Autores: Emilio Funes R. & Ginger Rodríguez G.
- * Fecha de creación: 20/03/2026
+ * Fecha: 28/03/2026
  */
 
 #ifndef ESTRUCTURAS_H

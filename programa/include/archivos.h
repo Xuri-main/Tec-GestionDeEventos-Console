@@ -1,8 +1,8 @@
 /**
  * Archivo: archivos.h
  * Descripcion: Declaraciones para la gestion de lectura y escritura de archivos .txt.
- * Autores: Emilio Funes R.
- * Fecha de creación: 25/03/2026
+ * Autores: Emilio Funes R , Ginger Rodríguez G. & Jareck Levell C.
+ * Fecha: 28/03/2026
  */
 
 #ifndef ARCHIVOS_H

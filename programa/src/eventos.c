@@ -192,7 +192,7 @@ void gestionEventos() {
         limpiarBufferEntrada();
     }
 
-    printf("\n¡Evento '%s' configurado exitosamente!\n", nuevoEvento->nombre);
+    printf("\nEvento '%s' configurado exitosamente!\n", nuevoEvento->nombre);
 }
 
 void estadoEventos() {
