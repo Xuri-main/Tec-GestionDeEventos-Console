@@ -11,6 +11,7 @@
 #define RUTA_USUARIOS "../data/usuarios.txt"
 #define RUTA_SITIOS "../data/sitios.txt"
 #define RUTA_EVENTOS "../data/eventos.txt"
+#define RUTA_FACTURAS "../data/facturas.txt"
 
 // Generales
 void cargarTodosLosDatos();
@@ -25,5 +26,9 @@ int cargarLoteSitiosDesdeRuta(const char *ruta);
 // Eventos
 void cargarEventos();
 void guardarEventos();
+
+// Facturas
+void cargarFacturas();
+void guardarFacturas();
 
 #endif // ARCHIVOS_H

@@ -267,3 +267,123 @@ void guardarEventos() {
     
     fclose(archivo);
 }
+
+// Facturas
+
+void cargarFacturas() {
+    FILE *archivo = fopen(RUTA_FACTURAS, "r");
+    
+    if (archivo == NULL) {
+        inicializarMemoriaFacturas(0);
+        return;
+    }
+
+    int cantidad;
+    if (fscanf(archivo, "%d\n", &cantidad) == 1) {
+        inicializarMemoriaFacturas(0);
+        
+        // Leer cada factura. Linea estatica.
+        char linea[512];
+        for (int i = 0; i < cantidad; i++) {
+            if (fgets(linea, sizeof(linea), archivo)) {
+                removerSaltoLinea(linea);
+                
+                char *f_compra = strtok(linea, ",");
+                char *cedula = strtok(NULL, ",");
+                char *nom_cli = strtok(NULL, ",");
+                char *nom_ev = strtok(NULL, ",");
+                char *prod = strtok(NULL, ",");
+                char *sitio = strtok(NULL, ",");
+                char *f_ev = strtok(NULL, ",");
+                
+                char *sub_str = strtok(NULL, ",");
+                char *serv_str = strtok(NULL, ",");
+                char *tot_str = strtok(NULL, ",");
+                char *cant_det_str = strtok(NULL, ",");
+
+                int valido = 1;
+                if (f_compra == NULL) valido = 0;
+                if (cedula == NULL) valido = 0;
+                if (nom_cli == NULL) valido = 0;
+                if (nom_ev == NULL) valido = 0;
+                if (prod == NULL) valido = 0;
+                if (sitio == NULL) valido = 0;
+                if (f_ev == NULL) valido = 0;
+                if (sub_str == NULL) valido = 0;
+                if (serv_str == NULL) valido = 0;
+                if (tot_str == NULL) valido = 0;
+                if (cant_det_str == NULL) valido = 0;
+
+                if (valido == 1) {
+                    int cant_detalles = atoi(cant_det_str);
+                    DetalleFactura *detalles_temp = (DetalleFactura *)malloc(cant_detalles * sizeof(DetalleFactura));
+                    
+                    for (int j = 0; j < cant_detalles; j++) {
+                        if (fgets(linea, sizeof(linea), archivo)) {
+                            removerSaltoLinea(linea);
+                            char *id_asiento = strtok(linea, ",");
+                            char *costo_str = strtok(NULL, ",");
+                            
+                            if (id_asiento != NULL) {
+                                if (costo_str != NULL) {
+                                    detalles_temp[j].identificador_asiento = asignarCadenaDinamica(id_asiento);
+                                    detalles_temp[j].costo = atof(costo_str);
+                                }
+                            }
+                        }
+                    }
+                    
+
+                    agregarFactura(f_compra, cedula, nom_cli, nom_ev, prod, sitio, f_ev, cant_detalles, detalles_temp, atof(sub_str), atof(serv_str), atof(tot_str));
+                    
+                    for (int j = 0; j < cant_detalles; j++) {
+                        if (detalles_temp[j].identificador_asiento != NULL) {
+                            free(detalles_temp[j].identificador_asiento);
+                        }
+                    }
+                    free(detalles_temp);
+                }
+            }
+        }
+    }
+    
+
+    fclose(archivo);
+}
+
+void guardarFacturas() {
+   
+    FILE *archivo = fopen(RUTA_FACTURAS, "w");
+    if (archivo == NULL) {
+        return;
+    }
+    int cantidad = getCantidadFacturas();
+    Factura *arreglo = getArregloFacturas();
+
+    fprintf(archivo, "%d\n", cantidad);
+    for (int i = 0; i < cantidad; i++) {
+        Factura *fac = &arreglo[i]; 
+        fprintf(archivo, "%s,%s,%s,%s,%s,%s,%s,%.2f,%.2f,%.2f,%d\n", 
+                fac->fecha_compra, 
+                fac->cedula_cliente, 
+                fac->nombre_cliente, 
+                fac->nombre_evento, 
+                fac->productora, 
+                fac->sitio_evento, 
+                fac->fecha_evento, 
+                fac->subtotal, 
+                fac->costo_servicio, 
+                fac->total, 
+                fac->cantidad_detalles);
+    
+
+
+        for (int j = 0; j < fac->cantidad_detalles; j++) {
+            fprintf(archivo, "%s,%.2f\n", fac->detalles[j].identificador_asiento, fac->detalles[j].costo);
+        }
+    }
+
+    fclose(archivo);
+}
+
+

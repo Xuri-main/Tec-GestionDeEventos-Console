@@ -41,11 +41,21 @@ typedef struct {
 } Evento;
 
 typedef struct {
+    char *identificador_asiento;
+    float costo;
+} DetalleFactura;
+
+typedef struct {
     int id_factura;
     char *fecha_compra;
     char *cedula_cliente;
     char *nombre_cliente;
     char *nombre_evento;
+    char *productora;
+    char *sitio_evento;
+    char *fecha_evento;
+    int cantidad_detalles;
+    DetalleFactura *detalles;
     float subtotal;
     float costo_servicio;
     float total;

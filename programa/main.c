@@ -2,7 +2,7 @@
  * Archivo: main.c
  * * Descripcion: Contiene la funcion principal y los menus del sistema.
  * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
- * Fecha: 26/03/2026
+ * Fecha: 28/03/2026
  */
 
 #include <stdio.h>
@@ -20,7 +20,6 @@ void menuAdministrativo();
 void menuGeneral();
 
 // PENDIENTE
-void listaFacturas() {}
 void estadisticas() {}
 
 int main() {
@@ -107,7 +106,7 @@ void menuAdministrativo() {
                 estadoEventos(); 
                 break;
             case 5: 
-                listaFacturas(); 
+                gestionListaFacturas(); 
                 break;
             case 6: 
                 estadisticas(); 

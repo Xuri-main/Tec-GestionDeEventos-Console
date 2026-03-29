@@ -1,0 +1,4 @@
+1
+28/03/2026,702920805,Ginger Rodriguez G.,Concierto de Rock,xuriwiru,Peppers Club,11/1/2027,800.00,40.00,840.00,2
+V1,400.00
+V2,400.00
