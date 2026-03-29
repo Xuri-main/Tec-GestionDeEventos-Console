@@ -1,26 +1,24 @@
 /**
  * Archivo: main.c
- * * Descripcion: Contiene la funcion principal y los menus del sistema.
+ * Descripcion: Contiene la funcion principal y los menus del sistema.
  * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
  * Fecha: 28/03/2026
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "include/archivos.h"
 #include "include/login.h"
 #include "include/sitios.h"
 #include "include/eventos.h"
+#include "include/facturas.h"
 #include "include/cadenas.h"
 #include "include/ventas.h"
+#include "include/estadisticas.h"
 
 // Menus
 void menuPrincipal();
 void menuAdministrativo();
 void menuGeneral();
-
-// PENDIENTE
-void estadisticas() {}
 
 int main() {
     int opcionPrincipal;
@@ -36,7 +34,7 @@ int main() {
         switch(opcionPrincipal) {
             case 1:
                 if (iniciarSesion()) {
-                    printf("\nAcceso concedido!\n");
+                    printf("\n¡Acceso concedido!\n");
                     menuAdministrativo();
                 } else {
                     printf("\nOops! Acceso denegado o archivo usuarios.txt no encontrado.\n");
@@ -49,6 +47,7 @@ int main() {
 
             case 3:
                 guardarTodosLosDatos();
+                liberarMemoriaFacturas();
                 liberarMemoriaEventos();
                 liberarMemoriaSitios();
                 printf("\nSaliendo del sistema...\n");
@@ -152,3 +151,4 @@ void menuGeneral() {
 
     } while (opcionGeneral != 3);
 }
+
