@@ -1,6 +1,12 @@
 /**
  * Archivo: facturas.c
  * Descripcion: Este archivo contiene las implementaciones de la gestion de facturas.
+ * Funciones principales:
+ * - Inicializar la memoria de facturas.
+ * - Agregar nuevas facturas al sistema.
+ * - Consultar la cantidad y el arreglo de facturas.
+ * - Mostrar la lista de facturas registradas.
+ * - Liberar la memoria utilizada.
  * Autores: Ginger Rodríguez G.
  * Fecha: 28/03/2026
  */
@@ -15,7 +21,19 @@ static Factura *listaFacturas = NULL;
 static int totalFacturas = 0;
 
 // Memoria
-
+/**
+ * Objetivo:
+ * Preparar la memoria para almacenar facturas
+ *
+ * Entradas:
+ * - capacidad_inicial: cantidad inicial de espacio para facturas
+ *
+ * Salidas:
+ * - Inicializa la lista de facturas en memoria
+ *
+ * Restricciones:
+ * - La capacidad inicial debe ser mayor que 0 para reservar memoria
+ */
 void inicializarMemoriaFacturas(int capacidad_inicial) {
     if (capacidad_inicial > 0) {
         listaFacturas = (Factura *)malloc(capacidad_inicial * sizeof(Factura));
@@ -26,7 +44,20 @@ void inicializarMemoriaFacturas(int capacidad_inicial) {
     totalFacturas = 0;
 }
 
-
+/**
+ * Objetivo:
+ * Liberar toda la memoria usada por las facturas y sus detalles
+ *
+ * Entradas:
+ * - No recibe parametros
+ *
+ * Salidas:
+ * - Elimina la informacion almacenada en memoria
+ * - Muestra un mensaje de confirmacion
+ *
+ * Restricciones:
+ * - Solo libera memoria si existen facturas almacenadas
+ */
 void liberarMemoriaFacturas() {
     if (listaFacturas == NULL) {
         return;
@@ -74,15 +105,54 @@ void liberarMemoriaFacturas() {
 }
 
 // Getters
+/**
+ * Objetivo:
+ * Obtener la cantidad total de facturas registradas
+ *
+ * Entradas:
+ * - No recibe parametros
+ *
+ * Salidas:
+ * - Retorna el numero total de facturas
+ *
+ * Restricciones:
+ * - Ninguna
+ */
 int getCantidadFacturas() {
     return totalFacturas;
 }
+
+/**
+ * Objetivo:
+ * Obtener el arreglo donde se almacenan las facturas
+ *
+ * Entradas:
+ * - No recibe parametros
+ *
+ * Salidas:
+ * - Retorna un puntero al arreglo de facturas
+ *
+ * Restricciones:
+ * - Puede retornar NULL si no hay facturas registradas
+ */
 Factura* getArregloFacturas() {
     return listaFacturas;
 }
 
 // Acciones
-
+/**
+ * Objetivo:
+ * Registrar una nueva factura en el sistema con toda su informacion.
+ *
+ * Entradas:
+ * - Datos de la factura
+ *
+ * Salidas:
+ * - Agrega una nueva factura al arreglo dinamico.
+ *
+ * Restricciones:
+ * - Debe haber memoria disponible.
+ */
 void agregarFactura(const char *fecha_compra, const char *cedula, const char *nombre_cliente, const char *nombre_evento, const char *productora, const char *sitio_evento, const char *fecha_evento, int cantidad_detalles, DetalleFactura *detalles, float subtotal, float costo_servicio, float total) {
     Factura *temp = (Factura *)realloc(listaFacturas, (totalFacturas + 1) * sizeof(Factura));
     
@@ -118,10 +188,20 @@ void agregarFactura(const char *fecha_compra, const char *cedula, const char *no
     totalFacturas++;
 }
 
-
-
 // Menus
-
+/**
+ * Objetivo:
+ * Mostrar en pantalla la lista de facturas registradas
+ *
+ * Entradas:
+ * - No recibe parametros
+ *
+ * Salidas:
+ * - Imprime la informacion general de cada factura
+ *
+ * Restricciones:
+ * - Debe existir al menos una factura registrada
+ */
 void gestionListaFacturas() {
     if (totalFacturas == 0) {
         printf("\nNo hay facturas registradas en el sistema.\n");

@@ -10,6 +10,21 @@
 #include "../include/login.h"
 #include "../include/archivos.h"
 
+/**
+ * Objetivo:
+ * Verificar el acceso del usuario
+ *
+ * Entradas:
+ * - Usuario ingresado por teclado
+ * - Contrasena ingresada por teclado
+ *
+ * Salida:
+ * - Retorna 1 si las credenciales son correctas
+ * - Retorna 0 si las credenciales son incorrectas
+ *
+ * Restricciones:
+ * - Deben existir credenciales de administrador guardadas.
+ */
 int iniciarSesion() {
     char usuario_ingresado[50];
     char clave_ingresada[50];

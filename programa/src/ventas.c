@@ -1,6 +1,10 @@
 /**
  * Archivo: ventas.c
  * Descripcion: Implementacion de funciones para la gestion de ventas y consultas.
+ * Funciones principales:
+ * - compararFechas: compara dos fechas.
+ * - consultaPorEvento: consulta eventos desde una fecha dada.
+ * - compraDeBoletos: permite comprar boletos y generar factura.
  * Autores: Emilio Funes R. , Ginger Rodríguez G. & Jareck Levell C.
  * Fecha: 28/03/2026
  */
@@ -15,7 +19,22 @@
 #include "../include/cadenas.h"
 #include "../include/facturas.h"
 
-
+/**
+ * Objetivo:
+ * Comparar dos fechas para saber si la fecha del evento es igual o posterior
+ * a una fecha inicial dada.
+ *
+ * Entradas:
+ * - fecha_evento: cadena de texto con la fecha del evento en formato DD/MM/AAAA.
+ * - fecha_inicial: cadena de texto con la fecha de referencia en formato DD/MM/AAAA.
+ *
+ * Salida:
+ * - Retorna 1 si la fecha del evento es igual o mayor que la fecha inicial.
+ * - Retorna 0 si la fecha del evento es menor que la fecha inicial.
+ *
+ * Restricciones:
+ * - Ambas fechas deben venir con el formato correcto: DD/MM/AAAA.
+ */
 int compararFechas(const char *fecha_evento, const char *fecha_inicial) {
     struct tm tm_evento = {0};
     struct tm tm_inicial = {0};
@@ -45,8 +64,26 @@ int compararFechas(const char *fecha_evento, const char *fecha_inicial) {
     return 0;
 }
 
-// Menus
 
+/**
+ * Objetivo:
+ * Mostrar al usuario los eventos que ocurren en una fecha dada o después de ella,
+ * permitiendo seleccionar uno para ver sus detalles y la disponibilidad de asientos.
+ *
+ * Entradas:
+ * - Una fecha inicial ingresada por el usuario en formato DD/MM/AAAA.
+ * - Una opción numérica para seleccionar un evento de la lista.
+ *
+ * Salidas:
+ * - Muestra en pantalla los eventos futuros encontrados.
+ * - Muestra los detalles del evento seleccionado:
+ *   nombre, productora, sitio, fecha, sectores y asientos disponibles.
+ *
+ * Restricciones:
+ * - Debe haber eventos registrados en el sistema.
+ * - La fecha debe ingresarse con el formato DD/MM/AAAA.
+ * - La opción elegida por el usuario debe estar dentro del rango mostrado.
+ */
 void consultaPorEvento() {
     if (getCantidadEventos() == 0) {
         printf("\nNo hay eventos registrados en el sistema.\n");
@@ -139,6 +176,26 @@ void consultaPorEvento() {
     free(indices_validos);
 }
 
+/**
+ * Objetivo:
+ * Permitir la compra de boletos para eventos futuros, mostrando los asientos
+ * disponibles, registrando la información del comprador y generando una factura.
+ *
+ * Entradas:
+ * - Selección del evento que desea comprar.
+ * - Cantidad de asientos que desea adquirir.
+ * - Identificadores de los asientos.
+ *
+ * Salidas:
+ * - Muestra los asientos disponibles por sector.
+ * - Calcula subtotal, costo por servicio y total final.
+ * - Genera una factura con la compra realizada.
+ *
+ * Restricciones:
+ * - El usuario solo puede seleccionar eventos válidos.
+ * - El asiento no debe haber sido vendido previamente.
+ * - La función aplica un 5% de costo por servicio sobre el subtotal.
+ */
 void compraDeBoletos() {
     if (getCantidadEventos() == 0) {
         printf("\nNo hay eventos registrados en el sistema.\n");

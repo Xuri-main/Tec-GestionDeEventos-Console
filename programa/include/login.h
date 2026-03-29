@@ -8,6 +8,7 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
+// Permite validar el inicio de sesion del administrador.
 int iniciarSesion();
 
 #endif // LOGIN_H
