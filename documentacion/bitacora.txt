@@ -1,0 +1,20 @@
+950f081 - Jareck-Levell, 2026-03-28 : Implementacion de facturas en formato pdf, closes #13
+ab55627 - Emilio Funes R., 2026-03-28 : Estadisticas . closes #12
+89777d7 - Ginger Rodríguez Gutiérrez, 2026-03-28 : documentacion interna(ventas-facturas). #15
+4ce275b - Ginger Rodríguez Gutiérrez, 2026-03-28 : Compra de boletos, lista de facturas, actualización de estructuras. closes #11
+8bb9f9f - Ginger Rodríguez Gutiérrez, 2026-03-28 : Opciones Generales, consultar eventos futuros. Implementacion de time.h. #11
+5487a91 - Emilio Funes R., 2026-03-27 : Gestion de eventos y estado de eventos. closes #10
+9a239ac - Emilio Funes R., 2026-03-26 : - Creación de Eventos. - Documentación Interna. closes #9
+2b0cace - Jareck-Levell, 2026-03-26 : Gestión de Sectores y Autogeneración de Asientos. closes #8
+29b34b4 - Jareck-Levell, 2026-03-25 : Iniciacion de sitios, carga por lotes, closes #7
+eb3d4b8 - Emilio Funes R., 2026-03-25 : Archivo de contraseña
+34d9a08 - Emilio Funes R., 2026-03-25 : Cambio en el Diseño de las estrucutras (de estatico a punteros).
+782342e - Ginger Rodríguez Gutiérrez, 2026-03-25 : Merge branch 'main' of https://github.com/Xuri-main/Tec-GestionDeEventos-Console
+6a29046 - Ginger Rodríguez Gutiérrez, 2026-03-25 : Sistema de autenticacion de Login. closes #4
+55dbca4 - Emilio Funes R., 2026-03-25 : Inicio de gestion de archivos .txt. closes #5
+ad170fc - Ginger Rodríguez Gutiérrez, 2026-03-21 : Menu Principal. closes #2
+61edde9 - Emilio Funes R., 2026-03-21 : Structs según la propuesta planteada. closes #3
+06d23e7 - Ginger Rodríguez Gutiérrez, 2026-03-20 : Diagramas. closes #1
+d961f93 - Emilio Funes R., 2026-03-20 : Carpeta y archivos vacios
+02e65cf - Emilio Funes R., 2026-03-20 : Setup inicial. closes #1
+c4b7eca - Hernán Emilio Funes Rivas, 2026-03-19 : Initial commit
